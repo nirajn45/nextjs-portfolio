@@ -9,12 +9,14 @@ const TAB_DATA = [
     id: "skills",
     content: (
       <ul className="list-disc pl-2">
-        <li>Node.js</li>
-        <li>Express</li>
-        <li>PostgreSQL</li>
-        <li>Sequelize</li>
-        <li>JavaScript</li>
+        <li>Photoshop</li>
+        <li>Illustrator</li>
+        <li>Canva</li>
+        <li>HTML/CSS</li>
+        <li>Javascript</li>
         <li>React</li>
+        <li>Node JS</li>
+        <li>React Native</li>
       </ul>
     ),
   },
@@ -23,8 +25,8 @@ const TAB_DATA = [
     id: "education",
     content: (
       <ul className="list-disc pl-2">
-        <li>Fullstack Academy of Code</li>
-        <li>University of California, Santa Cruz</li>
+        <li>B.Tech in Computer Science</li>
+        <li>Swami Vivekanand Institute Of Engineering & Technology</li>
       </ul>
     ),
   },
@@ -33,8 +35,9 @@ const TAB_DATA = [
     id: "certifications",
     content: (
       <ul className="list-disc pl-2">
-        <li>AWS Cloud Practitioner</li>
-        <li>Google Professional Cloud Developer</li>
+        <li>Mern Stack</li>
+        <li>Photoshop</li>
+        <li>Google Cloud Participation</li>
       </ul>
     ),
   },
@@ -57,12 +60,7 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I am a full stack web developer with a passion for creating
-            interactive and responsive web applications. I have experience
-            working with JavaScript, React, Redux, Node.js, Express, PostgreSQL,
-            Sequelize, HTML, CSS, and Git. I am a quick learner and I am always
-            looking to expand my knowledge and skill set. I am a team player and
-            I am excited to work with others to create amazing applications.
+          I am a versatile graphic designer and full stack web developer with a passion for creating visually engaging, interactive, and responsive applications. With a strong foundation in JavaScript, React, Redux, Node.js, Express, HTML, CSS, and Git, I bring creativity and technical expertise to every project. My experience extends to Android development, allowing me to craft seamless user experiences across platforms. I am a quick learner, always eager to expand my skill set, and I thrive in collaborative environments where I can contribute to building amazing applications.
           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton
