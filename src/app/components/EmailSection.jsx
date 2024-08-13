@@ -7,6 +7,7 @@ import Image from "next/image";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,22 +21,27 @@ const EmailSection = () => {
 
     // Form the request for sending data to the server.
     const options = {
-      // The method is POST because we are sending data.
       method: "POST",
-      // Tell the server we're sending JSON.
       headers: {
         "Content-Type": "application/json",
       },
-      // Body of the request is the JSON data we created above.
       body: JSONdata,
     };
 
-    const response = await fetch(endpoint, options);
-    const resData = await response.json();
+    try {
+      const response = await fetch(endpoint, options);
+      const resData = await response.json();
 
-    if (response.status === 200) {
-      console.log("Message sent.");
-      setEmailSubmitted(true);
+      if (response.ok) {
+        console.log("Message sent.");
+        setEmailSubmitted(true);
+        setError(null);
+      } else {
+        throw new Error(resData.error || "Failed to send email.");
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setError(err.message);
     }
   };
 
@@ -50,32 +56,25 @@ const EmailSection = () => {
           Let&apos;s Connect
         </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {" "}
-          I&apos;m currently looking for new opportunities, my inbox is always
-          open. Whether you have a question or just want to say hi, I&apos;ll
-          try my best to get back to you!
+          I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
         </p>
         <div className="socials flex flex-row gap-2">
           <Link href="https://github.com/MeowLaxmi">
-            <Image src={GithubIcon} alt="Github Icon" />
+            <Image src={GithubIcon} alt="GitHub Icon" />
           </Link>
-          <Link href="https://www.linkedin.com/in/laxmi-rajput-b51452253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
+          <Link href="https://www.linkedin.com/in/laxmi-rajput-b51452253">
+            <Image src={LinkedinIcon} alt="LinkedIn Icon" />
           </Link>
         </div>
       </div>
       <div>
         {emailSubmitted ? (
-          <p className="text-green-500 text-sm mt-2">
-            Email sent successfully!
-          </p>
+          <p className="text-green-500 text-sm mt-2">Email sent successfully!</p>
         ) : (
           <form className="flex flex-col" onSubmit={handleSubmit}>
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="text-white block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="email" className="text-white block mb-2 text-sm font-medium">
                 Your email
               </label>
               <input
@@ -84,14 +83,11 @@ const EmailSection = () => {
                 id="email"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="laxmirajput725@gmaail.com"
+                placeholder="example@gmail.com"
               />
             </div>
             <div className="mb-6">
-              <label
-                htmlFor="subject"
-                className="text-white block text-sm mb-2 font-medium"
-              >
+              <label htmlFor="subject" className="text-white block text-sm mb-2 font-medium">
                 Subject
               </label>
               <input
@@ -104,10 +100,7 @@ const EmailSection = () => {
               />
             </div>
             <div className="mb-6">
-              <label
-                htmlFor="message"
-                className="text-white block text-sm mb-2 font-medium"
-              >
+              <label htmlFor="message" className="text-white block text-sm mb-2 font-medium">
                 Message
               </label>
               <textarea
